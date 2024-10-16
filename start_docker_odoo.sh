@@ -275,8 +275,6 @@ volumes:
 networks:
   odoo-network:
 EOL
-  sudo cp $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
-  sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
   
 else
 
@@ -341,10 +339,11 @@ services:
 networks:
   odoo-network:
 EOL
-  sudo cp $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
-  sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
 
 fi
+
+sudo cp $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
+sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
 
 # Lancer Docker Compose avec sudo et le nom du projet
 echo "Démarrage de Docker Compose pour Odoo version ${OE_VERSION} avec le projet '${PROJECT_NAME}'..."
