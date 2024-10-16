@@ -342,13 +342,12 @@ EOL
 
 fi
 
-sudo cp $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
-sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
-
 # Lancer Docker Compose avec sudo et le nom du projet
 echo "Démarrage de Docker Compose pour Odoo version ${OE_VERSION} avec le projet '${PROJECT_NAME}'..."
-sudo docker-compose -f /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml -p ${PROJECT_NAME}_V${OE_VERSION} up -d
-sudo chmod 777 -R /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}
+sudo docker-compose -f docker-compose.yml -p ${PROJECT_NAME}_V${OE_VERSION} up -d
+sudo chmod 755 -R /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}
+sudo mv $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
+sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
 
 # Afficher l'adresse IP de la machine physique et les ports
 IP_ADDRESS=$(hostname -I | awk '{print $1}')  # Get the first IP address
@@ -356,7 +355,7 @@ echo "Les instances Odoo version ${GIT_VERSION} sont maintenant en cours d'exéc
 echo "Ports utilisés :"
 
 if [ "$INSTALL_TWO_INSTANCES" = "yes" ]; then
-  sudo chmod 777 -R /opt/odoo${OE_VERSION}
+  sudo chmod 755 -R /opt/odoo${OE_VERSION}
   echo "  - Production: http://$IP_ADDRESS:$PROD_PORT"
   echo "  - Test: http://$IP_ADDRESS:$TEST_PORT"
   echo "Pour des modifications sur les containers veuillez modifier le fichier docker-compose.yml et excuter la commande suivante:"
@@ -365,7 +364,7 @@ if [ "$INSTALL_TWO_INSTANCES" = "yes" ]; then
   echo "==> File conf: nano /opt/odoo${OE_VERSION}/config/${PROJECT_NAME}/odoo.conf"
   echo "==> File conf: nano /opt/odoo${OE_VERSION}/config-test/${PROJECT_NAME}/odoo.conf"
 else
-  sudo chmod 777 -R /opt/odoo${OE_VERSION}
+  sudo chmod 755 -R /opt/odoo${OE_VERSION}
   echo "  - Test: http://$IP_ADDRESS:$TEST_PORT"
   echo "Pour des modifications sur les containers veuillez modifier le fichier docker-compose.yml et excuter la commande suivante:"
   echo "==> Chemin: cd /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}"
