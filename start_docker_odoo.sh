@@ -276,7 +276,7 @@ networks:
   odoo-network:
 EOL
   sudo cp $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
-  sudo chmod 644 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
+  sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
   
 else
 
@@ -342,13 +342,13 @@ networks:
   odoo-network:
 EOL
   sudo cp $COMPOSE_FILE /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
-  sudo chmod 644 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
+  sudo chmod 777 /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml
 
 fi
 
 # Lancer Docker Compose avec sudo et le nom du projet
 echo "Démarrage de Docker Compose pour Odoo version ${OE_VERSION} avec le projet '${PROJECT_NAME}'..."
-sudo docker-compose -f docker-compose.yml -p ${PROJECT_NAME}_V${OE_VERSION} up -d
+sudo docker-compose -f /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}/docker-compose.yml -p ${PROJECT_NAME}_V${OE_VERSION} up -d
 sudo chmod 777 -R /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}
 
 # Afficher l'adresse IP de la machine physique et les ports
