@@ -355,7 +355,7 @@ echo "Les instances Odoo version ${GIT_VERSION} sont maintenant en cours d'exéc
 echo "Ports utilisés :"
 
 if [ "$INSTALL_TWO_INSTANCES" = "yes" ]; then
-  sudo chmod 777 -R /opt/odoo${OE_VERSION}
+  sudo chmod 777 -R /opt/odoo${OE_VERSION}/odoo-web-data
   echo "  - Production: http://$IP_ADDRESS:$PROD_PORT"
   echo "  - Test: http://$IP_ADDRESS:$TEST_PORT"
   echo "Pour des modifications sur les containers veuillez modifier le fichier docker-compose.yml et excuter la commande suivante:"
@@ -364,7 +364,7 @@ if [ "$INSTALL_TWO_INSTANCES" = "yes" ]; then
   echo "==> File conf: nano /opt/odoo${OE_VERSION}/config/${PROJECT_NAME}/odoo.conf"
   echo "==> File conf: nano /opt/odoo${OE_VERSION}/config-test/${PROJECT_NAME}/odoo.conf"
 else
-  sudo chmod 777 -R /opt/odoo${OE_VERSION}
+  sudo chmod 777 -R /opt/odoo${OE_VERSION}/odoo-web-data
   echo "  - Test: http://$IP_ADDRESS:$TEST_PORT"
   echo "Pour des modifications sur les containers veuillez modifier le fichier docker-compose.yml et excuter la commande suivante:"
   echo "==> Chemin: cd /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}"
