@@ -213,11 +213,6 @@ services:
     depends_on:
       - postgres
     tty: true
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 2G 
     environment:
       - HOST=${PROJECT_NAME}_V${OE_VERSION}_db
       - USER=odoo
@@ -244,11 +239,6 @@ services:
     depends_on:
       - postgres
     tty: true
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 2G 
     environment:
       - HOST=${PROJECT_NAME}_V${OE_VERSION}_db
       - USER=odoo
@@ -311,11 +301,6 @@ services:
     depends_on:
       - postgres
     tty: true
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 2G 
     environment:
       - HOST=${PROJECT_NAME}_V${OE_VERSION}_db
       - USER=odoo
