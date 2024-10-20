@@ -111,7 +111,7 @@ function is_port_in_use() {
   nc -z localhost "$1" 2>/dev/null
 }
 
-CUSTOM_PORT=2
+CUSTOM_PORT=1
 
 # Set initial ports
 INSTANCE_PORT=${CUSTOM_PORT}00${OE_VERSION}
