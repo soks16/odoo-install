@@ -64,8 +64,7 @@ done
 
 
 # Définir les chemins de configuration et de clonage
-PROD_CONFIG="/opt/odoo${OE_VERSION}/config/${PROJECT_NAME}"
-TEST_CONFIG="/opt/odoo${OE_VERSION}/config-test/${PROJECT_NAME}"
+INTANCE_CONFIG="/opt/odoo${OE_VERSION}/config/${PROJECT_NAME}"
 SRC_CONFIG="./odoo.conf"
 COMPOSE_FILE="./docker-compose.yml"
 
@@ -152,16 +151,16 @@ EOL
 echo "Le fichier odoo.conf a été créé."
 INSTANCE_PORT=$(find_available_port $INSTANCE_PORT)
   
-# Si l'utilisateur choisit d'installer uniquement une instance de test
-sudo mkdir -p $TEST_CONFIG
-sudo chmod 755 -R $TEST_CONFIG
+# Si l'utilisateur choisit d'installer uniquement une instance
+sudo mkdir -p $INTANCE_CONFIG
+sudo chmod 755 -R $INSTANCE_CONFIG
 
-# Copier le fichier de configuration uniquement pour le test
-echo "Copie du fichier odoo.conf vers /opt/odoo${OE_VERSION}/config-test/${PROJECT_NAME} pour le test..."
-sudo mv $SRC_CONFIG $TEST_CONFIG/odoo.conf && echo "Copie vers la configuration de test réussie."
-sudo chmod 644 $TEST_CONFIG/odoo.conf
+# Copier le fichier de configuration uniquement
+echo "Copie du fichier odoo.conf vers /opt/odoo${OE_VERSION}/config/${PROJECT_NAME} ..."
+sudo mv $SRC_CONFIG $INTANCE_CONFIG/odoo.conf && echo "Copie vers la configuration réussie."
+sudo chmod 644 $INSTANCE_CONFIG/odoo.conf
   
-# Créer docker-compose.yml avec seulement odoo_test
+# Créer docker-compose.yml avec seulement odoo
 sudo tee $COMPOSE_FILE > /dev/null <<EOL
 version: '3'
 
@@ -179,9 +178,9 @@ services:
       - odoo-network
     restart: always
 
-  odoo_test:
+  odoo_intance:
     image: odoo:${GIT_VERSION}
-    container_name: ${PROJECT_NAME}_V${OE_VERSION}_test
+    container_name: ${PROJECT_NAME}_V${OE_VERSION}_instance
     depends_on:
       - postgres
     tty: true
@@ -196,8 +195,8 @@ services:
       - /opt/odoo${OE_VERSION}/OCA/server-tools:/mnt/extra-addons/OCA/server-tools
       - /opt/odoo${OE_VERSION}/OCA/web:/mnt/extra-addons/OCA/web
       - /opt/odoo${OE_VERSION}/enterprise/addons:/mnt/enterprise
-      - /opt/odoo${OE_VERSION}/config-test/${PROJECT_NAME}:/etc/odoo
-      - /opt/odoo${OE_VERSION}/odoo-log-test/${PROJECT_NAME}:/var/log/odoo
+      - /opt/odoo${OE_VERSION}/config/${PROJECT_NAME}:/etc/odoo
+      - /opt/odoo${OE_VERSION}/odoo-log/${PROJECT_NAME}:/var/log/odoo
       - "/opt/odoo${OE_VERSION}/odoo-web-data/${PROJECT_NAME}:/var/lib/odoo"
     ports:
       - "${INSTANCE_PORT}:8069"
@@ -224,7 +223,7 @@ if [ $? -eq 0 ]; then
   echo "Pour des modifications sur les containers veuillez modifier le fichier docker-compose.yml et exécuter la commande suivante :"
   echo "==> Chemin: cd /opt/odoo${OE_VERSION}/custom/addons/${PROJECT_NAME}"
   echo "==> Commande: docker-compose -f docker-compose.yml -p ${PROJECT_NAME}_V${OE_VERSION} up -d"
-  echo "==> Fichier de configuration: nano /opt/odoo${OE_VERSION}/config-test/${PROJECT_NAME}/odoo.conf"
+  echo "==> Fichier de configuration: nano /opt/odoo${OE_VERSION}/config/${PROJECT_NAME}/odoo.conf"
 else
   echo "Erreur lors de l'exécution de Docker Compose. Veuillez vérifier la configuration et réessayer."
 fi
