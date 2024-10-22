@@ -153,12 +153,10 @@ INSTANCE_PORT=$(find_available_port $INSTANCE_PORT)
   
 # Si l'utilisateur choisit d'installer uniquement une instance
 sudo mkdir -p $INTANCE_CONFIG
-sudo chmod 755 -R $INSTANCE_CONFIG
 
 # Copier le fichier de configuration uniquement
 echo "Copie du fichier odoo.conf vers /opt/odoo${OE_VERSION}/config/${PROJECT_NAME} ..."
 sudo mv $SRC_CONFIG $INTANCE_CONFIG/odoo.conf && echo "Copie vers la configuration réussie."
-sudo chmod 644 $INSTANCE_CONFIG/odoo.conf
   
 # Créer docker-compose.yml avec seulement odoo
 sudo tee $COMPOSE_FILE > /dev/null <<EOL
