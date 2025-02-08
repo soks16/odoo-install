@@ -20,7 +20,7 @@ SSL_PEM_KEY="False"
 SSL_PRV_KEY="False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8017"
-SERVER_NAME="localhost" # test.odoo.com || 13.17.16.15
+SERVER_NAME="test.softgraphic.com" # test.odoo.com || 13.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="17.0"
