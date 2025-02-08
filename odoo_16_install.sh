@@ -5,14 +5,14 @@
  
 ##fixed parameters
 #odoo
-OE_USER="odoo"
+OE_USER="odoo17"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_POSTGRESQL="True"
+INSTALL_POSTGRESQL="False"
 CREATE_USER_POSTGRESQL="True"
 INSTALL_NGINX="True"
 ADD_SSL="False"
@@ -25,19 +25,19 @@ SERVER_NAME="localhost" # test.odoo.com || 13.17.16.15
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="17.0"
 # Set this to True if you want to install Odoo 10 Enterprise!
-IS_ENTERPRISE="True"
+IS_ENTERPRISE="False"
 #set the superadmin password
-OE_SUPERADMIN="ODOO@ADMIN"
+OE_SUPERADMIN="ODOO@ADMIN@SG"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
 DB_HOST="127.0.0.1"
 DB_PORT="5432"
 DB_USER=$OE_USER
-DB_PASSWORD="LEGEND"
+DB_PASSWORD="LEGEND@SG"
 
 ENABLE_SSL="False"
-ADMIN_EMAIL="odoo@example.com"
+ADMIN_EMAIL="softgraphic23@gmail.com"
 WEBSITE_NAME="_"
 
 
